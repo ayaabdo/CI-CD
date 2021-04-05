@@ -1,0 +1,25 @@
+resource "aws_instance" "bastion" {
+  ami           = var.ami_id
+  instance_type = "t2.micro"
+  subnet_id      =  module.iti.public1_id
+  vpc_security_group_ids = [aws_security_group.securitygrb1.id]
+  key_name = aws_key_pair.deployer.key_name
+  tags = {
+      Name = "public-ec2"
+  }
+
+  provisioner "local-exec" {
+    command = "echo bastion server ip is ${self.public_ip} "
+  }
+}
+
+resource "aws_instance" "application" {
+  ami           = var.ami_id
+  instance_type = "t2.micro"
+  subnet_id      = module.iti.private1_id
+  vpc_security_group_ids = [aws_security_group.securitygrb2.id]
+  key_name = aws_key_pair.deployer.key_name
+  tags = {
+      Name = "private-ec2"
+  }
+}
