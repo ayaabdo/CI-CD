@@ -1,34 +1,34 @@
 variable cidr {
-    type = "string"
+    type = string
 }
 
 variable name {
-    type = "string"
+    type = string
 }
 
 variable region {
-    type = "string"
+    type = string
 }
 
 variable public1_subnet_cidr {
-    type = "string"
+    type = string
 }
 
 variable public2_subnet_cidr {
-    type = "string"
+    type = string
 }
 
 variable private1_subnet_cidr {
-    type = "string"
+    type = string
 }
 
 variable private2_subnet_cidr {
-    type = "string"
+    type = string
 }
 
 variable az1 {
-    type = "string"
+    type = string
 }
 variable az2 {
-    type = "string"
+    type = string
 }
