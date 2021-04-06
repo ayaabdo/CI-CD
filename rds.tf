@@ -4,8 +4,8 @@ resource "aws_db_instance" "my_rds" {
   instance_class       = var.ins_class
   name                 = var.db_name
   //port                 = "3306"
-  //vpc_security_group_ids = [aws_security_group.securitygrb2.id]
-  vpc_security_group_ids = [aws_db_security_group.rds_sg.id]
+  vpc_security_group_ids = [aws_security_group.securitygrb2.id]
+  //vpc_security_group_ids = [aws_db_security_group.rds_sg.id]
   db_subnet_group_name   = aws_db_subnet_group.my_db_rds.name
 }
 
