@@ -35,7 +35,7 @@ resource "aws_security_group" "securitygrb2" {
     from_port   = 3000
     to_port     = 3000
     protocol    = "tcp"
-    cidr_blocks = [module.iti.cidr_block]
+    cidr_blocks = ["0.0.0.0/0"]
   }
   
   egress {
