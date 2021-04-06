@@ -1,14 +1,13 @@
 resource "aws_db_instance" "my_rds" {
-  allocated_storage    = 10
-  engine               = var.db_engine
-  engine_version       = var.db_engine
-  instance_class       = var.ins_class
-  name                 = var.db_name
-  port                 = 3306         
+  allocated_storage = 10
+  engine = "mysql"
+  engine_version = "5.7"
+  instance_class = "db.t2.micro"
+  name = "mydb"
   parameter_group_name = "default.mysql5.7"
-  skip_final_snapshot = true
   username = "admin"
-  password = "admin"
+  password = "admin123"
+  port = "3306" 
   //vpc_security_group_ids = [aws_security_group.securitygrb2.id]
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
   db_subnet_group_name   = aws_db_subnet_group.my_db_rds.name
