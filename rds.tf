@@ -4,7 +4,7 @@ resource "aws_db_instance" "my_rds" {
   engine_version       = var.db_engine
   instance_class       = var.ins_class
   name                 = var.db_name
-  port                 = 3306
+  port                 = 3306         
   parameter_group_name = "default.mysql5.7"
   skip_final_snapshot = true
   username = "admin"
