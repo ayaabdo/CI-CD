@@ -35,20 +35,9 @@ resource "aws_security_group" "securitygrb2" {
     from_port   = 3000
     to_port     = 3000
     protocol    = "tcp"
-    cidr_blocks = [var.cidr]
+    cidr_blocks = [module.iti.cidr_block]
   }
-  ingress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = [var.cidr]
-  }
-   ingress {
-    from_port   = 6379
-    to_port     = 6379
-    protocol    = "tcp"
-    cidr_blocks = [var.cidr]
-  }
+  
   egress {
     from_port = 0
     to_port   = 0
