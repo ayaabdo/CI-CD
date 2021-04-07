@@ -9,7 +9,7 @@ resource "aws_instance" "bastion" {
   }
 
   provisioner "local-exec" {
-    command = "echo bastion server ip is ${self.aws_key_pair.deployer} "
+    command = "echo bastion server ip is ${self.public_ip} "
   }
 }
 
