@@ -1,0 +1,47 @@
+---
+# tasks file for slave-role
+
+- name: update apt
+  apt: 
+      update_cache: yes
+         
+- name: create dir
+  file:
+      name: jenkins_home
+      state: directory
+      mode: 0777
+      
+- name: install openjdk
+  apt:
+      name: openjdk-8-jdk
+      state: present
+      
+- name: install docker
+  apt:
+    name: docker.io
+    state: present
+
+- name: Start docker service
+  service:
+    name: docker
+    state: started
+
+- name: change sock permission
+  ansible.builtin.file:
+     path: /var/run/docker.sock
+     mode: '0777'
+  
+- name: install nodejs
+  apt:
+      name: nodejs
+      state: present
+
+- name: install npm
+  apt:
+      name: npm
+      state: present
+
+- name: copying file agent.jar
+  copy:
+      src: agent.jar
+      dest: /home/ubuntu/

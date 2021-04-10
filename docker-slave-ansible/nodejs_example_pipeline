@@ -1,0 +1,29 @@
+pipeline {
+    agent {label 'aws-slave'}
+
+    stages {
+        stage('preparation') {
+            steps {
+                git 'https://github.com/ayaabdo/jenkins_nodejs_example.git'
+            }
+        }
+        stage('build') {
+            steps {
+                 sh 'docker build -f dockerfile . -t 992016/nodejs:v1.0'
+            }
+        }
+        stage('artifact') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'pass', usernameVariable: 'username')]){
+                 sh 'docker login -u ${username} -p ${pass}'
+                 sh 'docker push 992016/nodejs:v1.0'
+            }
+        }
+    }
+    stage('deploy') {
+            steps {
+                 sh '''docker run -d -t -i -e RDS_HOSTNAME='terraform-20210407095903388200000001.cyd9acxbedt4.us-east-1.rds.amazonaws.com' -e RDS_PORT='3306' -e RDS_USERNAME='admin' -e RDS_PASSWORD='admin123' -e RDS_PORT='3306' -e REDIS_HOSTNAME='mu-cluster.7b3vel.0001.use1.cache.amazonaws.com' -e REDIS_PORT='6379' -p 3010:3000 992016/nodejs:v1.0'''
+            }
+        }
+}
+}
